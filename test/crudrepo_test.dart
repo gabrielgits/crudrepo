@@ -5,7 +5,6 @@ import 'package:result_dart/result_dart.dart';
 import 'package:mockito/annotations.dart';
 import 'crudrepo_test.mocks.dart';
 
-
 /// A model class representing a user with an [id] and a [name].
 ///
 /// Provides methods for serializing to and from JSON.
@@ -53,11 +52,12 @@ class ManagerUser {
 /// Mock class for the CrudRepository interface.
 /// Used for testing purposes to simulate remote repository behavior.
 @GenerateMocks([CrudRepository])
-
 /// Unit tests for the ManagerUser class.
 void main() {
   // Register a dummy value for ResultDart<Object, Exception>
-  provideDummy<ResultDart<Object, Exception>>(Success(UserModel(id: 0, name: '')));
+  provideDummy<ResultDart<Object, Exception>>(
+    Success(UserModel(id: 0, name: '')),
+  );
 
   // Initialize the mock repository and manager before each test
   late MockCrudRepository mockRepository;
@@ -69,13 +69,12 @@ void main() {
     managerUser = ManagerUser(mockRepository);
   });
 
-
   /// Group of tests to verify the success cases for user management operations.
-  /// 
+  ///
   /// This group contains tests for:
   /// - Creating a user and ensuring the returned user matches the expected values.
   /// - Retrieving a user by ID and verifying the returned user's properties.
-  /// 
+  ///
   /// Mocks are used to simulate repository responses with successful results.
   group('Success case test', () {
     final user = UserModel(id: 1, name: 'John Doe');
@@ -83,7 +82,6 @@ void main() {
     /// Tests that the `createUser` method returns the created user with the correct
     /// id and name when the repository successfully creates the user.
     test('createUser should return created user', () async {
-   
       // Mock the repository's createItem method to return a successful result
       when(
         mockRepository.createItem(any),
@@ -100,7 +98,6 @@ void main() {
     /// Tests that the `getUser` method returns the user with the correct id and name
     /// when the repository successfully retrieves the user.
     test('getUser should return user by id', () async {
-     
       // Mock the repository's getItem method to return a successful result
       when(mockRepository.getItem(any)).thenAnswer((_) async => Success(user));
 
@@ -114,40 +111,36 @@ void main() {
   });
 
   /// Group of tests to verify the failure cases for user management operations.
-  /// 
+  ///
   /// This group contains tests for:
   /// - Creating a user and ensuring an exception is thrown when the repository fails.
   /// - Retrieving a user by ID and ensuring an exception is thrown when the repository fails
-  /// 
+  ///
   /// Mocks are used to simulate repository responses with failure results.
   group('Failure case test', () {
-
     /// Tests that the `createUser` method throws an exception when the repository fails
     /// to create the user.
     test('createUser should throw exception on error', () async {
-      
       // Mock the repository's createItem method to return a failure result
       when(
         mockRepository.createItem(any),
       ).thenAnswer((_) async => Failure(Exception('Error creating user')));
-      
+
       // Call the createUser method and expect it to throw an exception
       final result = managerUser.createUser(1, 'John Doe');
-      
+
       // Verify that an exception is thrown
       expect(result, throwsA(isA<Exception>()));
     });
 
-
     /// Tests that the `getUser` method throws an exception when the repository fails
     /// to retrieve the user.
     test('getUser should throw exception on error', () async {
-      
       // Mock the repository's getItem method to return a failure result
       when(
         mockRepository.getItem(any),
       ).thenAnswer((_) async => Failure(Exception('Error getting user')));
-      
+
       // Call the getUser method and expect it to throw an exception
       final result = managerUser.getUser(1);
 

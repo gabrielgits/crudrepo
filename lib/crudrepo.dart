@@ -3,7 +3,7 @@
 /// The package includes a DioService for remote API interactions and a FedsLocal interface for local
 /// database operations. It supports caching and provides repositories for CRUD operations with
 /// remote, local, and cached data sources.
-/// 
+///
 /// This package is designed to be used in Flutter applications, but it can also be used in Dart console applications.
 
 library;

@@ -1,5 +1,3 @@
-
-
 import 'package:dio/dio.dart';
 
 /// A service class for making HTTP requests using Dio.
@@ -16,7 +14,6 @@ import 'package:dio/dio.dart';
 /// ```
 
 class DioService {
-
   /// Creates an instance of [DioService].
   /// This constructor initializes the Dio instance with default options.
   final Dio _dio = Dio();
@@ -30,8 +27,9 @@ class DioService {
       _dio.options.headers.remove("Authorization");
     }
   }
+
   /// A map containing the HTTP headers to be used for POST requests.
-  /// 
+  ///
   /// This map defines the headers that will be included in the HTTP
   /// POST requests made by the Dio service. It typically contains
   /// key-value pairs specifying content type, authorization tokens,
@@ -42,7 +40,7 @@ class DioService {
     "Content-Type": "application/json", //"application/x-www-form-urlencoded"
   };
 
-  /// Sends a GET request to the specified [url] and returns the response as a 
+  /// Sends a GET request to the specified [url] and returns the response as a
   /// `Map<String, dynamic>`.
   ///
   /// This method is asynchronous and will wait for the response before returning.
@@ -153,7 +151,6 @@ class DioService {
   /// - Throws: An exception if the request fails or the response cannot be processed.
   Future<List<int>> getData(String url) async {
     try {
-
       final response = await _dio.get(
         url,
         options: Options(

@@ -1,4 +1,3 @@
-
 import 'package:result_dart/result_dart.dart';
 
 import '../dio_service.dart';
@@ -36,9 +35,7 @@ class CrudRepositoryRemote<T extends Object> implements CrudRepository<T> {
   AsyncResult<T> getItem(int idItem) async {
     try {
       // GET request to fetch the item with the given ID from the remote API
-      final response = await _datasource.get(
-        '$_url/$_table/$idItem',
-      );
+      final response = await _datasource.get('$_url/$_table/$idItem');
 
       // If the response indicates an error, return a Failure
       if (response['status'] == false) {
@@ -83,9 +80,7 @@ class CrudRepositoryRemote<T extends Object> implements CrudRepository<T> {
   AsyncResult<T> deleteItem(int idItem) async {
     try {
       // DELETE request to remove the item with the given ID from the remote API
-      final response = await _datasource.delete(
-        '$_url/$_table/$idItem',
-      );
+      final response = await _datasource.delete('$_url/$_table/$idItem');
 
       // If the response indicates an error, return a Failure
       if (response['status'] == false) {
@@ -107,10 +102,7 @@ class CrudRepositoryRemote<T extends Object> implements CrudRepository<T> {
   }) async {
     try {
       // PUT request to update the item with the given ID in the remote API
-      final response = await _datasource.put(
-        '$_url/$_table/$id',
-        body: json,
-      );
+      final response = await _datasource.put('$_url/$_table/$id', body: json);
 
       // If the response indicates an error, return a Failure
       if (response['status'] == false) {
@@ -180,9 +172,7 @@ class CrudRepositoryRemote<T extends Object> implements CrudRepository<T> {
   AsyncResult<int> deleteAll() async {
     try {
       // DELETE request to remove all items from the remote API for the specified table
-      final response = await _datasource.delete(
-        '$_url/$_table',
-      );
+      final response = await _datasource.delete('$_url/$_table');
 
       // If the response indicates an error, return a Failure
       if (response['status'] == false) {

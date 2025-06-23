@@ -2,6 +2,7 @@ import 'package:result_dart/result_dart.dart';
 
 import '../sqlitelib/feds_local.dart';
 import 'crud_repository.dart';
+
 /// A repository for performing CRUD operations on a local SQLite database.
 /// This repository is designed to handle operations for a specific type [T],
 /// which must be an object that can be serialized to and from JSON.
@@ -18,8 +19,9 @@ class CrudRepositoryLocal<T extends Object> implements CrudRepository<T> {
     required FedsLocal datasource,
     required String table,
     required T Function(Map<String, dynamic>) fromJson,
-  })  : _fromJson = fromJson, _datasource = datasource,
-        _table = table;
+  }) : _fromJson = fromJson,
+       _datasource = datasource,
+       _table = table;
 
   @override
   AsyncResult<T> getItem(int idItem) async {
@@ -43,8 +45,10 @@ class CrudRepositoryLocal<T extends Object> implements CrudRepository<T> {
   AsyncResult<T> createItem(T item) async {
     try {
       // Save a new item to the data source.
-      final response =
-          await _datasource.save(_table, item: (item as dynamic).toJson());
+      final response = await _datasource.save(
+        _table,
+        item: (item as dynamic).toJson(),
+      );
 
       // Convert the response to the desired object type.
       final newItem = _fromJson(response);
@@ -75,10 +79,7 @@ class CrudRepositoryLocal<T extends Object> implements CrudRepository<T> {
   }) async {
     try {
       // Update an item in the data source with the provided JSON data.
-      final response = await _datasource.update(
-        _table,
-        item: json,
-      );
+      final response = await _datasource.update(_table, item: json);
       if (response['id'] > 0) {
         // Return the updated item if the operation was successful.
         return Success(_fromJson(json));
@@ -99,13 +100,17 @@ class CrudRepositoryLocal<T extends Object> implements CrudRepository<T> {
 
       // Filter the items based on the provided filters.
       final filteredItems = allItems
-          .where((item) => filters.entries
-              .every((filter) => item[filter.key] == filter.value))
+          .where(
+            (item) => filters.entries.every(
+              (filter) => item[filter.key] == filter.value,
+            ),
+          )
           .toList();
 
       // Convert the filtered items to the desired object type.
-      final List<T> items =
-          filteredItems.map<T>((json) => _fromJson(json)).toList();
+      final List<T> items = filteredItems
+          .map<T>((json) => _fromJson(json))
+          .toList();
       return Success(items);
     } on Exception catch (e) {
       // Handle any exceptions that occur.

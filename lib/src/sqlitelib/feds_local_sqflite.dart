@@ -13,8 +13,11 @@ class FedsLocalSqflite implements FedsLocal {
   final String dbName;
   final String? androidVersionPath;
 
-  const FedsLocalSqflite(
-      {required this.dbPath, required this.dbName, this.androidVersionPath});
+  const FedsLocalSqflite({
+    required this.dbPath,
+    required this.dbName,
+    this.androidVersionPath,
+  });
 
   Future<Database?> _initDatabase() async {
     if (_database != null) {
@@ -30,8 +33,10 @@ class FedsLocalSqflite implements FedsLocal {
     bool fileCreated = await File(deviceDb).exists();
     if (!fileCreated) {
       ByteData data = await rootBundle.load('$dbPath$dbName');
-      List<int> bytes =
-          data.buffer.asUint8List(data.offsetInBytes, data.lengthInBytes);
+      List<int> bytes = data.buffer.asUint8List(
+        data.offsetInBytes,
+        data.lengthInBytes,
+      );
       await File(deviceDb).writeAsBytes(bytes);
     }
     _database = await openDatabase(deviceDb);
@@ -39,8 +44,10 @@ class FedsLocalSqflite implements FedsLocal {
   }
 
   @override
-  Future<Map<String, dynamic>> delete(String table,
-      {required Object id}) async {
+  Future<Map<String, dynamic>> delete(
+    String table, {
+    required Object id,
+  }) async {
     // Initialize the database if not already initialized
     _database = await _initDatabase();
 
@@ -105,8 +112,11 @@ class FedsLocalSqflite implements FedsLocal {
     // Check if the database is initialized
     if (_database != null) {
       // Query the table for a record with the specified ID
-      final list =
-          await _database!.query(table, where: 'id = ?', whereArgs: [id]);
+      final list = await _database!.query(
+        table,
+        where: 'id = ?',
+        whereArgs: [id],
+      );
 
       // If a record is found, return the first result
       if (list.isNotEmpty) {
@@ -119,8 +129,10 @@ class FedsLocalSqflite implements FedsLocal {
   }
 
   @override
-  Future<Map<String, dynamic>> save(String table,
-      {required Map<String, dynamic> item}) async {
+  Future<Map<String, dynamic>> save(
+    String table, {
+    required Map<String, dynamic> item,
+  }) async {
     // Initialize the database if not already initialized
     _database = await _initDatabase();
 
@@ -140,8 +152,10 @@ class FedsLocalSqflite implements FedsLocal {
   }
 
   @override
-  Future<int> saveAll(String table,
-      {required List<Map<String, dynamic>> items}) async {
+  Future<int> saveAll(
+    String table, {
+    required List<Map<String, dynamic>> items,
+  }) async {
     // Initialize the database if not already initialized
     _database = await _initDatabase();
     int quant = 0;
@@ -167,8 +181,10 @@ class FedsLocalSqflite implements FedsLocal {
   }
 
   @override
-  Future<Map<String, dynamic>> search(String table,
-      {required String criteria}) async {
+  Future<Map<String, dynamic>> search(
+    String table, {
+    required String criteria,
+  }) async {
     // Initialize the database if not already initialized
     _database = await _initDatabase();
 
@@ -188,18 +204,17 @@ class FedsLocalSqflite implements FedsLocal {
   }
 
   @override
-  Future<List<Map<String, dynamic>>> searchAll(String table,
-      {required String criteria}) async {
+  Future<List<Map<String, dynamic>>> searchAll(
+    String table, {
+    required String criteria,
+  }) async {
     // Initialize the database if not already initialized
     _database = await _initDatabase();
 
     // Check if the database is initialized
     if (_database != null) {
       // Query the table for records matching the specified criteria
-      final list = await _database!.query(
-        table,
-        where: criteria,
-      );
+      final list = await _database!.query(table, where: criteria);
 
       // If matching records are found, return the list of results
       if (list.isNotEmpty) {
@@ -212,18 +227,17 @@ class FedsLocalSqflite implements FedsLocal {
   }
 
   @override
-  Future<List<Map<String, dynamic>>> searchAllRaw(String sql,
-      {List<Object?>? criteriaListData}) async {
+  Future<List<Map<String, dynamic>>> searchAllRaw(
+    String sql, {
+    List<Object?>? criteriaListData,
+  }) async {
     // Initialize the database if not already initialized
     _database = await _initDatabase();
 
     // Check if the database is initialized
     if (_database != null) {
       // Execute the raw SQL query with the provided criteria list data
-      final list = await _database!.rawQuery(
-        sql,
-        criteriaListData,
-      );
+      final list = await _database!.rawQuery(sql, criteriaListData);
 
       // If the query returns results, return the list of records
       if (list.isNotEmpty) {
@@ -251,9 +265,11 @@ class FedsLocalSqflite implements FedsLocal {
   }
 
   @override
-  Future<int> searchUpdate(String table,
-      {required String criteria,
-      required Map<String, dynamic> updateItem}) async {
+  Future<int> searchUpdate(
+    String table, {
+    required String criteria,
+    required Map<String, dynamic> updateItem,
+  }) async {
     /// Updates records in the specified table of the SQLite database based on the given criteria.
     _database = await _initDatabase();
     // Check if the database is initialized
@@ -269,8 +285,10 @@ class FedsLocalSqflite implements FedsLocal {
   }
 
   @override
-  Future<Map<String, dynamic>> update(String table,
-      {required Map<String, dynamic> item}) async {
+  Future<Map<String, dynamic>> update(
+    String table, {
+    required Map<String, dynamic> item,
+  }) async {
     // Initialize the database if not already initialized
     _database = await _initDatabase();
 

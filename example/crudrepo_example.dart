@@ -5,7 +5,6 @@ import 'package:crudrepo/src/sqlitelib/feds_local_sqflite.dart';
 /// This example demonstrates how to create, read, update, and delete user items
 /// using both local and remote repositories.
 
-
 /// The User model is assumed to have a `toJson` method for serialization
 /// and a `fromJson` factory constructor for deserialization.
 class User {
@@ -33,12 +32,7 @@ class User {
 
   /// Converts a User instance to a JSON map.
   Map<String, dynamic> toJson() {
-    return {
-      'id': id,
-      'name': name,
-      'email': email,
-      'password': password,
-    };
+    return {'id': id, 'name': name, 'email': email, 'password': password};
   }
 }
 
@@ -66,7 +60,12 @@ void main() async {
   );
 
   // Create a user
-  final newUser = User(id: 1, name: 'John Doe', email: 'john.doe@example.com', password: 'password123');
+  final newUser = User(
+    id: 1,
+    name: 'John Doe',
+    email: 'john.doe@example.com',
+    password: 'password123',
+  );
   // Use the createItem method to save the new user to the local database.
   await localRepo.createItem(newUser);
 
@@ -75,11 +74,13 @@ void main() async {
   print('All users: $users');
 
   // Update a user
-  final updatedUser = User(id: 1, name: 'John Doe', email: 'john.doe@example.com', password: 'newpassword');
-  await localRepo.updateItem(
-    id: updatedUser.id,
-    json: updatedUser.toJson(),
+  final updatedUser = User(
+    id: 1,
+    name: 'John Doe',
+    email: 'john.doe@example.com',
+    password: 'newpassword',
   );
+  await localRepo.updateItem(id: updatedUser.id, json: updatedUser.toJson());
 
   // Delete a user
   await localRepo.deleteItem(1);

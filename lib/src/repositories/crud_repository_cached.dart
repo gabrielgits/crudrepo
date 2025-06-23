@@ -3,6 +3,7 @@ import 'package:result_dart/result_dart.dart';
 import '../dio_service.dart';
 import '../sqlitelib/feds_local.dart';
 import 'crud_repository.dart';
+
 /// A repository for performing CRUD operations on a remote API with local caching.
 /// This repository is designed to handle operations for a specific type [T],
 /// which must be an object that can be serialized to and from JSON.
@@ -45,7 +46,7 @@ class CrudRepositoryCached<T extends Object> implements CrudRepository<T> {
         // If successful, convert the response to the model and update local cache
         final item = _fromJson(remoteResponse['data']);
         await _localDatasource.update(_table, item: remoteResponse['data']);
-        // 
+        //
         return Success(item);
       }
     } catch (_) {
@@ -71,13 +72,13 @@ class CrudRepositoryCached<T extends Object> implements CrudRepository<T> {
     try {
       final response = await _remoteDatasource.get('$_url/$_table');
       if (response['status'] == true) {
-      // If successful, save all items to the local cache
-      await _localDatasource.saveAll(_table, items: response['data']);
-      // Convert the response data to a list of model objects
-      final List<T> items = (response['data'] as List)
-        .map<T>((json) => _fromJson(json))
-        .toList();
-      return Success(items);
+        // If successful, save all items to the local cache
+        await _localDatasource.saveAll(_table, items: response['data']);
+        // Convert the response data to a list of model objects
+        final List<T> items = (response['data'] as List)
+            .map<T>((json) => _fromJson(json))
+            .toList();
+        return Success(items);
       }
     } catch (e, stack) {
       // Log any errors from the remote fetch
@@ -101,19 +102,19 @@ class CrudRepositoryCached<T extends Object> implements CrudRepository<T> {
     try {
       // Build URL parameters from the filters map
       final urlParams = filters.entries
-        .map((e) => '${e.key}/${e.value}')
-        .join('/');
+          .map((e) => '${e.key}/${e.value}')
+          .join('/');
       final remoteResponse = await _remoteDatasource.get(
-      '$_url/$_table/$urlParams',
+        '$_url/$_table/$urlParams',
       );
       if (remoteResponse['status'] == true) {
-      // If successful, save all items to the local cache
-      await _localDatasource.saveAll(_table, items: remoteResponse['data']);
-      // Convert the response data to a list of model objects
-      final List<T> items = (remoteResponse['data'] as List)
-        .map<T>((json) => _fromJson(json))
-        .toList();
-      return Success(items);
+        // If successful, save all items to the local cache
+        await _localDatasource.saveAll(_table, items: remoteResponse['data']);
+        // Convert the response data to a list of model objects
+        final List<T> items = (remoteResponse['data'] as List)
+            .map<T>((json) => _fromJson(json))
+            .toList();
+        return Success(items);
       }
     } catch (_) {
       // Ignore remote errors, fallback to local
@@ -135,12 +136,12 @@ class CrudRepositoryCached<T extends Object> implements CrudRepository<T> {
     try {
       // Send a POST request to the remote datasource to create the item
       final response = await _remoteDatasource.post(
-      '$_url/$_table',
-      body: (item as dynamic).toJson(),
+        '$_url/$_table',
+        body: (item as dynamic).toJson(),
       );
       // If the response indicates failure, return a Failure result
       if (response['status'] == false) {
-      return Failure(Exception(response['message']));
+        return Failure(Exception(response['message']));
       }
       // Update the local cache with the newly created item
       await _localDatasource.update(_table, item: response['data']);
@@ -181,12 +182,12 @@ class CrudRepositoryCached<T extends Object> implements CrudRepository<T> {
     try {
       // Send a PUT request to the remote datasource to update the item
       final response = await _remoteDatasource.put(
-      '$_url/$_table/$id',
-      body: json,
+        '$_url/$_table/$id',
+        body: json,
       );
       // If the response indicates failure, return a Failure result
       if (response['status'] == false) {
-      return Failure(Exception(response['message']));
+        return Failure(Exception(response['message']));
       }
       // Update the local cache with the updated item
       await _localDatasource.update(_table, item: response['data']);
@@ -207,7 +208,7 @@ class CrudRepositoryCached<T extends Object> implements CrudRepository<T> {
       final response = await _remoteDatasource.delete('$_url/$_table');
       // If the response indicates failure, return a Failure result
       if (response['status'] == false) {
-      return Failure(Exception(response['message']));
+        return Failure(Exception(response['message']));
       }
       // Delete all items from the local cache
       final q = await _localDatasource.deleteAll(_table);
