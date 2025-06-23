@@ -30,7 +30,7 @@ Add the dependency to your `pubspec.yaml`:
 
 ```yaml
 dependencies:
-  crudrepo: ^0.1.0
+  crudrepo: ^0.1.1
 ```
 
 ## Usage
