@@ -1,7 +1,7 @@
 name: crudrepo
 description: A package for managing CRUD operations with a repository pattern in Flutter.
 version: 0.1.1
-repository: hhttps://github.com/gabrielgits/crudrepo.git
+repository: https://github.com/gabrielgits/crudrepo.git
 
 environment:
   sdk: ^3.8.1
