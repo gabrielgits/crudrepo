@@ -10,6 +10,7 @@ library;
 
 export 'src/dio_service.dart';
 export 'src/sqlitelib/feds_local.dart';
+export 'src/sqlitelib/feds_local_sqflite.dart';
 export 'src/sqlitelib/feds_local_sqflite_ffi.dart';
 export 'src/repositories/crud_repository.dart';
 export 'src/repositories/crud_repository_local.dart';
