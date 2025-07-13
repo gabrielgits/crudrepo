@@ -1,6 +1,6 @@
 import 'package:result_dart/result_dart.dart';
 
-import '../dio_service.dart';
+import '../services/dio_service.dart';
 import 'crud_repository.dart';
 
 /// A repository for performing CRUD operations on a remote API using DioService.

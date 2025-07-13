@@ -1,5 +1,5 @@
 import 'package:crudrepo/crudrepo.dart';
-import 'package:crudrepo/src/sqlitelib/feds_local_sqflite.dart';
+import 'package:crudrepo/src/services/sqlitelib/feds_local_sqflite.dart';
 
 /// Example of using the CrudRepository mixin with a User model.
 /// This example demonstrates how to create, read, update, and delete user items

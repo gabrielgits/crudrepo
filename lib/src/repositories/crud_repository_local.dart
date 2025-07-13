@@ -1,6 +1,6 @@
 import 'package:result_dart/result_dart.dart';
 
-import '../sqlitelib/feds_local.dart';
+import '../services/sqlitelib/feds_local.dart';
 import 'crud_repository.dart';
 
 /// A repository for performing CRUD operations on a local SQLite database.

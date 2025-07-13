@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.2.0
+
+-   **Desktop Support:** Added support for desktop platforms (Windows, macOS, Linux) using FFI and sqflite_common_ffi.
+-   **Bug Fixes:** Fixed an issue with local database initialization on desktop.
+-   **Migration Instructions:** No migration is required for existing users.
+
+
 
 
 ## 0.1.3
