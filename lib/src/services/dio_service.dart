@@ -163,4 +163,34 @@ class DioService {
       rethrow;
     }
   }
+
+  /// Sends a POST request with form data to the specified [url] and returns the response as a map.
+  /// ///
+  /// This method is used to upload files or send data in a multipart/form-data format.
+  /// It accepts a [FormData] object as the body of the request.
+  /// ///
+  /// Parameters:
+  /// - [url]: The endpoint URL to which the POST request will be sent.
+  /// - [body]: A [FormData] object containing the data to be sent in the request.
+  /// Returns:
+  /// A `Future` that resolves to a `Map<String, dynamic>` containing the response data.
+  /// Throws:
+  /// - An exception if the request fails or if there is an error during the process.
+  Future<Map<String, dynamic>> postFormData(
+    String url, {
+    required FormData body,
+  }) async {
+    _dio.options.responseType = ResponseType.json;
+
+    final response = await _dio.post(
+      url,
+      data: body,
+      options: Options(headers: {
+        "Connection": "Keep-Alive",
+        "Accept": "application/json",
+        "Content-Type": "multipart/form-data",
+      }),
+    );
+    return response.data;
+  }
 }
