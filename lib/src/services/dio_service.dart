@@ -176,7 +176,7 @@ class DioService {
   /// A `Future` that resolves to a `Map<String, dynamic>` containing the response data.
   /// Throws:
   /// - An exception if the request fails or if there is an error during the process.
-  Future<Map<String, dynamic>> postFormData(
+  Future<Map<String, dynamic>> postData(
     String url, {
     required FormData body,
   }) async {
