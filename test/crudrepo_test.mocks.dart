@@ -102,17 +102,17 @@ class MockCrudRepository<T extends Object> extends _i1.Mock
           as _i3.Future<_i4.ResultDart<T, Exception>>);
 
   @override
-  _i3.Future<_i4.ResultDart<T, Exception>> deleteItem(int? idItem) =>
+  _i3.Future<_i4.ResultDart<int, Exception>> deleteItem(int? idItem) =>
       (super.noSuchMethod(
             Invocation.method(#deleteItem, [idItem]),
-            returnValue: _i3.Future<_i4.ResultDart<T, Exception>>.value(
-              _i5.dummyValue<_i4.ResultDart<T, Exception>>(
+            returnValue: _i3.Future<_i4.ResultDart<int, Exception>>.value(
+              _i5.dummyValue<_i4.ResultDart<int, Exception>>(
                 this,
                 Invocation.method(#deleteItem, [idItem]),
               ),
             ),
           )
-          as _i3.Future<_i4.ResultDart<T, Exception>>);
+          as _i3.Future<_i4.ResultDart<int, Exception>>);
 
   @override
   _i3.Future<_i4.ResultDart<List<T>, Exception>> customGetItems(
