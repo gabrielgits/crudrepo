@@ -1,5 +1,9 @@
 # Changelog
 
+### 0.3.2
+
+- Fix Local database sqlite.
+
 ### 0.3.1
 
 - Uploud binary file.

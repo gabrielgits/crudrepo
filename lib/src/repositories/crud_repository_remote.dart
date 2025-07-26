@@ -77,7 +77,7 @@ class CrudRepositoryRemote<T extends Object> implements CrudRepository<T> {
   }
 
   @override
-  AsyncResult<T> deleteItem(int idItem) async {
+  AsyncResult<int> deleteItem(int idItem) async {
     try {
       // DELETE request to remove the item with the given ID from the remote API
       final response = await _datasource.delete('$_url/$_table/$idItem');
@@ -87,8 +87,8 @@ class CrudRepositoryRemote<T extends Object> implements CrudRepository<T> {
         return Failure(Exception(response['message']));
       }
 
-      // Parse the response data into an instance of type T
-      return Success(_fromJson(response['data']));
+      
+      return Success(idItem);
     } on Exception catch (e) {
       // Return any exceptions as a Failure
       return Failure(e);

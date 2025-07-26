@@ -60,12 +60,12 @@ class CrudRepositoryLocal<T extends Object> implements CrudRepository<T> {
   }
 
   @override
-  AsyncResult<T> deleteItem(int idItem) async {
+  AsyncResult<int> deleteItem(int idItem) async {
     try {
       // Delete an item by its ID from the data source.
-      final response = await _datasource.delete(_table, id: idItem);
-      // Convert the response to the desired object type.
-      return Success(_fromJson(response));
+      await _datasource.delete(_table, id: idItem);
+     
+      return Success(idItem);
     } on Exception catch (e) {
       // Handle any exceptions that occur.
       return Failure(e);

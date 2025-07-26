@@ -48,7 +48,7 @@ mixin CrudRepository<T extends Object> {
   /// [idItem] - The unique identifier of the item to delete.
   ///
   /// Returns a [Result] containing the deleted item of type [T].
-  AsyncResult<T> deleteItem(int idItem);
+  AsyncResult<int> deleteItem(int idItem);
 
   /// Retrieves items of type [T] based on custom filters.
   ///

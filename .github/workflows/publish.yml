@@ -24,7 +24,7 @@ jobs:
       - name: Run tests
         run: flutter test
       - name: Publish
-        uses: k-paxian/dart-package-publisher@v1.6.2
+        uses: k-paxian/dart-package-publisher@v1.6.1
         with:
           credentialJson: ${{ secrets.CREDENTIAL_JSON }}
           flutter: true

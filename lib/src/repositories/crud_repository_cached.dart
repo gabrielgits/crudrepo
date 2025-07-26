@@ -156,7 +156,7 @@ class CrudRepositoryCached<T extends Object> implements CrudRepository<T> {
   }
 
   @override
-  AsyncResult<T> deleteItem(int idItem) async {
+  AsyncResult<int> deleteItem(int idItem) async {
     try {
       // Delete the item from the remote datasource (API)
       final response = await _remoteDatasource.delete('$_url/$_table/$idItem');
@@ -166,8 +166,8 @@ class CrudRepositoryCached<T extends Object> implements CrudRepository<T> {
       }
       // Delete the item from the local cache
       await _localDatasource.delete(_table, id: idItem);
-      // Convert the response data to the model object
-      return Success(_fromJson(response['data']));
+      
+      return Success(idItem);
     } on Exception catch (e) {
       // Return a Failure result if any exception occurs
       return Failure(e);

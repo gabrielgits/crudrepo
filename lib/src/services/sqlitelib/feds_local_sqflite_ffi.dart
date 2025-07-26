@@ -23,6 +23,14 @@ class FedsLocalSqfliteFfi implements FedsLocal {
     this.androidVersionPath,
   });
 
+  static void initDesktopDb() {
+    // Initialize FFI for sqflite_ffi
+    sqfliteFfiInit();
+
+    // Set the database factory
+    databaseFactory = databaseFactoryFfi;
+  }
+
   /// Initializes the database connection.
   ///
   /// On desktop platforms, it uses `sqflite_ffi` to open the database.
@@ -36,11 +44,6 @@ class FedsLocalSqfliteFfi implements FedsLocal {
     if (_database != null) {
       return _database;
     }
-
-    // Initialize FFI for sqflite_ffi
-    sqfliteFfiInit();
-    // Set the database factory
-    databaseFactory = databaseFactoryFfi;
 
     // Get the application documents directory
     Directory appDocDir = await getApplicationDocumentsDirectory();
