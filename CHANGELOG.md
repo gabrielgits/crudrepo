@@ -1,5 +1,13 @@
 # Changelog
 
+### 0.3.4
+
+- Add public token getter to DioService for Firebase authentication support.
+
+### 0.3.3
+
+- Update pubspec.yaml.
+
 ### 0.3.2
 
 - Fix Local database sqlite.
