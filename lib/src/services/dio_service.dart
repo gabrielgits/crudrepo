@@ -19,6 +19,9 @@ class DioService {
   final Dio _dio = Dio();
 
   String _token = '';
+  
+  String get token => _token;
+  
   set token(String value) {
     _token = value;
     if (_token.isNotEmpty) {
